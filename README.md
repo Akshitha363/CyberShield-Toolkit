@@ -76,3 +76,6 @@ You can tweak settings dynamically in `config.json` without modifying code:
 - `max_attempts`: Number of retries allowed before triggering lockout.
 - `fail_threshold`: Number of failures from an IP required to trigger a brute force alert.
 - `unique_password_threshold`: Limit of distinct password attempts on a single user.
+=======
+# CyberShield-Toolkit
+A Python-based cybersecurity toolkit implementing password security, login protection, brute-force detection, and password guessing detection for educational purposes.
