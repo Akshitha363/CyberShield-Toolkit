@@ -1,0 +1,24 @@
+{
+  "project_name": "Cybersecurity Authentication Toolkit",
+  "version": "1.0.0",
+  "logging": {
+    "log_file": "logs/security.log",
+    "log_level": "INFO"
+  },
+  "lockout_simulator": {
+    "max_attempts": 3,
+    "cooldown_seconds": 15
+  },
+  "brute_force_detector": {
+    "fail_threshold": 3,
+    "csv_path": "data/sample_logins.csv"
+  },
+  "password_guessing_detector": {
+    "unique_password_threshold": 3,
+    "csv_path": "data/sample_logins.csv"
+  },
+  "password_checker": {
+    "dictionary_path": "data/dictionary.txt",
+    "min_length": 8
+  }
+}

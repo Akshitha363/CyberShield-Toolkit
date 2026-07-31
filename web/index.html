@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Authentication Toolkit Dashboard</title>
+    <!-- Google Fonts for premium appearance -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-shield-halved logo-icon"></i>
+                <div class="logo-text">
+                    <h2>CYBER<span>AUTH</span></h2>
+                    <p>AUTHENTICATION TOOLKIT</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="dashboard">
+                    <i class="fa-solid fa-gauge-high"></i> Overview Dashboard
+                </a>
+                <a href="#" class="nav-item" data-tab="checker">
+                    <i class="fa-solid fa-key"></i> Strength Checker
+                </a>
+                <a href="#" class="nav-item" data-tab="simulator">
+                    <i class="fa-solid fa-user-lock"></i> Lockout Simulator
+                </a>
+                <a href="#" class="nav-item" data-tab="generator">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Password Generator
+                </a>
+                <a href="#" class="nav-item" data-tab="bruteforce">
+                    <i class="fa-solid fa-server"></i> Brute Force Detector
+                </a>
+                <a href="#" class="nav-item" data-tab="guessing">
+                    <i class="fa-solid fa-user-ninja"></i> Password Guessing
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="status-indicator">
+                    <span class="pulse-dot green"></span>
+                    <span>System Secure</span>
+                </div>
+                <small>v1.0.0 (Web Console)</small>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="workspace-header">
+                <div class="header-title">
+                    <h1 id="current-tab-title">Overview Dashboard</h1>
+                    <p id="current-tab-subtitle">Real-time security analytics and event logs</p>
+                </div>
+                <div class="system-time" id="live-clock">
+                    <i class="fa-regular fa-clock"></i> <span>2026-07-30 15:00:00</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Container -->
+            <div class="tab-viewport">
+                
+                <!-- TAB 1: OVERVIEW DASHBOARD -->
+                <section class="tab-pane active" id="tab-dashboard">
+                    <div class="grid-layout">
+                        <!-- Stat Card 1 -->
+                        <div class="stat-card border-cyan">
+                            <div class="stat-icon bg-cyan-dim"><i class="fa-solid fa-shield-halved text-cyan"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Modules</h3>
+                                <p class="stat-value">5</p>
+                            </div>
+                        </div>
+                        <!-- Stat Card 2 -->
+                        <div class="stat-card border-green">
+                            <div class="stat-icon bg-green-dim"><i class="fa-solid fa-lock text-green"></i></div>
+                            <div class="stat-info">
+                                <h3>Active Defense</h3>
+                                <p class="stat-value">Enabled</p>
+                            </div>
+                        </div>
+                        <!-- Stat Card 3 -->
+                        <div class="stat-card border-amber">
+                            <div class="stat-icon bg-amber-dim"><i class="fa-solid fa-circle-exclamation text-amber"></i></div>
+                            <div class="stat-info">
+                                <h3>Threat Warnings</h3>
+                                <p class="stat-value" id="dash-warning-count">0</p>
+                            </div>
+                        </div>
+                        <!-- Stat Card 4 -->
+                        <div class="stat-card border-red">
+                            <div class="stat-icon bg-red-dim"><i class="fa-solid fa-triangle-exclamation text-red"></i></div>
+                            <div class="stat-info">
+                                <h3>Critical Alerts</h3>
+                                <p class="stat-value" id="dash-alert-count">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-double-row">
+                        <!-- Left Panel: Tool Summary -->
+                        <div class="console-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-terminal"></i> Security System Details</h3>
+                            </div>
+                            <div class="card-body">
+                                <p>Welcome to the Web Console interface of the <strong>Cybersecurity Authentication Toolkit</strong>. This portal represents a modular, scalable toolkit implementing industrial authentication patterns.</p>
+                                <ul class="features-list">
+                                    <li><strong>Entropy Estimation</strong>: Mathematical assessment of passwords against offline cracking cluster speeds.</li>
+                                    <li><strong>Adaptive Lockouts</strong>: Dynamic attempt counters and cooldown timers mimicking enterprise IAM platforms.</li>
+                                    <li><strong>CSPRNG Randomizer</strong>: Cryptographically secure string assembler using hardware-backed entropy.</li>
+                                    <li><strong>Correlation Analyzers</strong>: Ingest CSV server logs to pinpoint brute-forcing IPs and user targeting.</li>
+                                </ul>
+                                <div class="academic-note mt-3">
+                                    <i class="fa-solid fa-graduation-cap text-cyan"></i>
+                                    <span><strong>Academic Notice</strong>: Program utilizes pure frontend computing to ensure compatibility, privacy, and easy grading without setting up Python web frameworks.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Live Alerts feed -->
+                        <div class="console-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-bug"></i> Central Security Logs</h3>
+                                <button class="btn btn-sm btn-outline-danger" id="clear-dashboard-logs">Clear Logs</button>
+                            </div>
+                            <div class="card-body px-0 py-0">
+                                <div class="terminal-log-feed" id="central-logs-container">
+                                    <div class="log-entry log-info">
+                                        <span class="log-time">[15:00:00]</span> <span class="log-tag">[INFO]</span> Cybersecurity Authentication Toolkit Web Interface Initialized successfully.
+                                    </div>
+                                    <div class="log-entry log-success">
+                                        <span class="log-time">[15:00:01]</span> <span class="log-tag">[INFO]</span> Cryptographic entropy generator pool active.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: STRENGTH CHECKER -->
+                <section class="tab-pane" id="tab-checker">
+                    <div class="split-view">
+                        <div class="panel-left">
+                            <div class="console-card">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-shield-heart"></i> Password Analyzer</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="checker-password">Enter Password to Audit</label>
+                                        <div class="password-input-wrapper">
+                                            <input type="password" id="checker-password" placeholder="Type password here..." autocomplete="off">
+                                            <button type="button" id="toggle-checker-visibility" class="visibility-btn">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="metric-meter-container">
+                                        <div class="meter-bar">
+                                            <div class="meter-fill" id="strength-meter-fill" style="width: 0%;"></div>
+                                        </div>
+                                        <div class="meter-label">
+                                            <span>Strength Rating:</span>
+                                            <span class="rating-text text-red" id="strength-rating-text">Empty</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sequential & Repeated Character Alerts -->
+                            <div class="console-card mt-3">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-triangle-exclamation"></i> Identified Vulnerabilities</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="vulnerabilities-panel" id="vulnerabilities-container">
+                                        <div class="empty-placeholder">
+                                            <i class="fa-solid fa-circle-check text-green"></i>
+                                            <p>No vulnerabilities identified yet. Enter a password above to begin analysis.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Strength Details Panel -->
+                        <div class="panel-right">
+                            <div class="console-card height-full">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-chart-simple"></i> Entropy & Crack Time Metrics</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="metrics-grid">
+                                        <div class="metric-box">
+                                            <span class="metric-title">Length</span>
+                                            <span class="metric-val" id="metric-length">0</span>
+                                        </div>
+                                        <div class="metric-box">
+                                            <span class="metric-title">Entropy Pool (R)</span>
+                                            <span class="metric-val" id="metric-pool">0</span>
+                                        </div>
+                                        <div class="metric-box col-span-2">
+                                            <span class="metric-title">Mathematical Entropy</span>
+                                            <span class="metric-val text-cyan" id="metric-entropy">0.00 <span class="unit">bits</span></span>
+                                        </div>
+                                        <div class="metric-box col-span-2">
+                                            <span class="metric-title">Est. Crack Time (10<sup>10</sup> hashes/sec)</span>
+                                            <span class="metric-val text-red" id="metric-crack-time">Instantaneous</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="remediation-box mt-3">
+                                        <h4>Remediation Advice</h4>
+                                        <ul class="remediation-list" id="remediation-container">
+                                            <li>Enter a password to receive custom recommendations.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 3: LOGIN SIMULATOR -->
+                <section class="tab-pane" id="tab-simulator">
+                    <div class="split-view">
+                        <div class="panel-left">
+                            <!-- Auth Form -->
+                            <div class="console-card">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-lock"></i> Simulated Authentication Portal</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="info-alert mb-3">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        <div>
+                                            <strong>Valid Accounts for testing:</strong>
+                                            <br>• <code>sec_admin</code> (Pass: <code>AdminPass123!</code>)
+                                            <br>• <code>analyst_bob</code> (Pass: <code>AnalysisSec99#</code>)
+                                        </div>
+                                    </div>
+
+                                    <!-- Lockout Overlay -->
+                                    <div class="lockout-screen hidden" id="lockout-overlay">
+                                        <div class="lockout-message">
+                                            <i class="fa-solid fa-user-shield text-red animate-pulse"></i>
+                                            <h3>ACCOUNT LOCKED OUT</h3>
+                                            <p>Too many failed login attempts have been detected.</p>
+                                            <div class="cooldown-timer">
+                                                Cooldown: <span id="lockout-countdown">15</span> seconds
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <form id="simulator-form" onsubmit="return false;">
+                                        <div class="form-group">
+                                            <label for="sim-username">Username</label>
+                                            <input type="text" id="sim-username" placeholder="Enter username..." autocomplete="off">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sim-password">Password</label>
+                                            <input type="password" id="sim-password" placeholder="Enter password..." autocomplete="off">
+                                        </div>
+                                        
+                                        <div class="login-meta">
+                                            <span class="attempts-counter">Attempts Remaining: <strong class="text-green" id="sim-remaining-attempts">3</strong></span>
+                                        </div>
+
+                                        <button class="btn btn-primary btn-block mt-3" id="sim-login-btn">Authenticate</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Attempts History Terminal -->
+                        <div class="panel-right">
+                            <div class="console-card height-full">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-history"></i> Simulator Access Logs</h3>
+                                    <button class="btn btn-sm btn-outline-secondary" id="clear-sim-history">Reset Stats</button>
+                                </div>
+                                <div class="card-body px-0 py-0">
+                                    <div class="terminal-log-feed" id="sim-history-container">
+                                        <div class="empty-placeholder py-5">
+                                            <i class="fa-solid fa-receipt text-muted"></i>
+                                            <p>No login attempts recorded yet.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: PASSWORD GENERATOR -->
+                <section class="tab-pane" id="tab-generator">
+                    <div class="split-view">
+                        <!-- Options Panel -->
+                        <div class="panel-left">
+                            <div class="console-card">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-sliders"></i> Generation Parameters</h3>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Length Slider -->
+                                    <div class="form-group">
+                                        <div class="slider-header">
+                                            <label for="gen-length">Password Length</label>
+                                            <span class="slider-value" id="gen-length-val">16</span>
+                                        </div>
+                                        <input type="range" id="gen-length" min="6" max="64" value="16" class="range-slider">
+                                    </div>
+
+                                    <!-- Toggles -->
+                                    <div class="toggles-grid">
+                                        <label class="switch-container">
+                                            <input type="checkbox" id="gen-lower" checked>
+                                            <span class="switch-slider"></span>
+                                            <span class="switch-label">Lowercase (a-z)</span>
+                                        </label>
+                                        <label class="switch-container">
+                                            <input type="checkbox" id="gen-upper" checked>
+                                            <span class="switch-slider"></span>
+                                            <span class="switch-label">Uppercase (A-Z)</span>
+                                        </label>
+                                        <label class="switch-container">
+                                            <input type="checkbox" id="gen-digits" checked>
+                                            <span class="switch-slider"></span>
+                                            <span class="switch-label">Numbers (0-9)</span>
+                                        </label>
+                                        <label class="switch-container">
+                                            <input type="checkbox" id="gen-symbols" checked>
+                                            <span class="switch-slider"></span>
+                                            <span class="switch-label">Symbols (!@#$)</span>
+                                        </label>
+                                    </div>
+
+                                    <button class="btn btn-primary btn-block mt-4" id="generate-btn">
+                                        <i class="fa-solid fa-arrows-rotate"></i> Generate Secure Password
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Display Panel -->
+                        <div class="panel-right">
+                            <div class="console-card height-full">
+                                <div class="card-header">
+                                    <h3><i class="fa-solid fa-eye-slash"></i> Generated Output</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="generated-output-box">
+                                        <input type="text" id="generated-password-field" readonly value="Click Generate above...">
+                                        <button class="btn btn-success" id="copy-password-btn" title="Copy to clipboard">
+                                            <i class="fa-solid fa-copy"></i> Copy
+                                        </button>
+                                    </div>
+
+                                    <div class="toast-notification hidden" id="copy-toast">
+                                        <i class="fa-solid fa-circle-check"></i> Copied to clipboard successfully!
+                                    </div>
+
+                                    <div class="mt-4" id="generator-strength-panel" style="display: none;">
+                                        <h4>Generated Password Strength Analysis</h4>
+                                        <div class="metrics-grid mt-2">
+                                            <div class="metric-box">
+                                                <span class="metric-title">Entropy</span>
+                                                <span class="metric-val text-green" id="gen-entropy-val">0.00 bits</span>
+                                            </div>
+                                            <div class="metric-box">
+                                                <span class="metric-title">Strength Rating</span>
+                                                <span class="metric-val text-cyan" id="gen-rating-val">Strong</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 4: BRUTE FORCE DETECTOR (Module 4) -->
+                <section class="tab-pane" id="tab-bruteforce">
+                    <div class="console-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-server"></i> Brute Force Log Ingestion Panel</h3>
+                            <div class="header-buttons">
+                                <button class="btn btn-sm btn-outline-cyan" id="load-bf-csv-btn">Load Sample CSV Data</button>
+                                <button class="btn btn-sm btn-outline-danger" id="clear-bf-btn">Reset Data</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="bf-csv-input">Paste CSV Data here (Format: <code>timestamp,username,ip_address,status,password_tried</code>)</label>
+                                <textarea id="bf-csv-input" rows="6" placeholder="Paste csv rows here..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" id="analyze-bf-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> Run Brute Force Analysis</button>
+                        </div>
+                    </div>
+
+                    <!-- Summary & Stats -->
+                    <div class="grid-layout mt-3 hidden" id="bf-summary-cards">
+                        <div class="stat-card border-red">
+                            <div class="stat-icon bg-red-dim"><i class="fa-solid fa-skull-crossbones text-red"></i></div>
+                            <div class="stat-info">
+                                <h3>Brute Force Threats</h3>
+                                <p class="stat-value" id="bf-threats-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card border-cyan">
+                            <div class="stat-icon bg-cyan-dim"><i class="fa-solid fa-list-check text-cyan"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Log lines</h3>
+                                <p class="stat-value" id="bf-total-lines">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alerts Box -->
+                    <div class="console-card mt-3 hidden" id="bf-alerts-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-bell text-red animate-pulse"></i> Brute Force Security Alerts</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="alerts-list" id="bf-alerts-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Datatable -->
+                    <div class="console-card mt-3 hidden" id="bf-table-card">
+                        <div class="card-header">
+                            <h3>Aggregated Source IP Statistics</h3>
+                        </div>
+                        <div class="card-body overflow-x-auto px-0 py-0">
+                            <table class="security-table" id="bf-stats-table">
+                                <thead>
+                                    <tr>
+                                        <th>Source IP</th>
+                                        <th>Total Attempts</th>
+                                        <th>Failures</th>
+                                        <th>Successes</th>
+                                        <th>Threat Level</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 5: PASSWORD GUESSING DETECTION (Module 5) -->
+                <section class="tab-pane" id="tab-guessing">
+                    <div class="console-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-user-ninja"></i> Password Guessing Ingestion Panel</h3>
+                            <div class="header-buttons">
+                                <button class="btn btn-sm btn-outline-cyan" id="load-pg-csv-btn">Load Sample CSV Data</button>
+                                <button class="btn btn-sm btn-outline-danger" id="clear-pg-btn">Reset Data</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="pg-csv-input">Paste CSV Data here (Format: <code>timestamp,username,ip_address,status,password_tried</code>)</label>
+                                <textarea id="pg-csv-input" rows="6" placeholder="Paste csv rows here..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" id="analyze-pg-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> Run Guessing Analysis</button>
+                        </div>
+                    </div>
+
+                    <!-- Summary & Stats -->
+                    <div class="grid-layout mt-3 hidden" id="pg-summary-cards">
+                        <div class="stat-card border-amber">
+                            <div class="stat-icon bg-amber-dim"><i class="fa-solid fa-masks-theater text-amber"></i></div>
+                            <div class="stat-info">
+                                <h3>Credential Guessing Targets</h3>
+                                <p class="stat-value" id="pg-threats-count">0</p>
+                            </div>
+                        </div>
+                        <div class="stat-card border-cyan">
+                            <div class="stat-icon bg-cyan-dim"><i class="fa-solid fa-list-check text-cyan"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Log lines</h3>
+                                <p class="stat-value" id="pg-total-lines">0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alerts Box -->
+                    <div class="console-card mt-3 hidden" id="pg-alerts-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-bell text-red animate-pulse"></i> Password Guessing Security Alerts</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="alerts-list" id="pg-alerts-container"></div>
+                        </div>
+                    </div>
+
+                    <!-- Datatable -->
+                    <div class="console-card mt-3 hidden" id="pg-table-card">
+                        <div class="card-header">
+                            <h3>Aggregated Username Audit</h3>
+                        </div>
+                        <div class="card-body overflow-x-auto px-0 py-0">
+                            <table class="security-table" id="pg-stats-table">
+                                <thead>
+                                    <tr>
+                                        <th>Target Username</th>
+                                        <th>Failed Attempts</th>
+                                        <th>Unique Passwords</th>
+                                        <th>IP Sources</th>
+                                        <th>Threat Level</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
